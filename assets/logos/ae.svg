@@ -1,0 +1,5 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="24" height="24" rx="5" fill="#00005b"/>
+  <rect x="0.5" y="0.5" width="23" height="23" rx="4.5" stroke="#d199ff" stroke-opacity="0.4"/>
+  <text x="4.5" y="16.5" font-family="'Segoe UI', Roboto, Helvetica, sans-serif" font-size="11" font-weight="900" fill="#d199ff">Ae</text>
+</svg>
