@@ -1,0 +1,735 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nguyễn Tuấn Hưng | Video Editor & AI Creator</title>
+  <meta name="description" content="Portfolio Nguyễn Tuấn Hưng - Video Editor & AI Creator: TVC Quảng Cáo & Phim Hoạt Hình AI.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="silver-theme">
+  <!-- CINEMATIC TRAILER OVERLAY -->
+  <div id="trailer" class="trailer">
+    <audio id="trailer-audio" src="assets/audio/trailer_soundtrack.mp3" preload="auto"></audio>
+    <div class="letterbox bar-top"></div>
+    <div class="letterbox bar-bot"></div>
+    <div class="film-grain"></div>
+    <div class="anamorphic-flare"></div>
+    <div id="trailer-flash" class="trailer-flash"></div>
+    <canvas id="trailer-canvas" class="trailer-canvas"></canvas>
+    
+    <!-- HIGH-TECH CINEMATIC HUD -->
+    <div class="trailer-hud">
+      <div class="hud-item hud-tl">
+        <span class="hud-rec-dot"></span>
+        <span class="hud-mono">REC [4K UHD]</span>
+        <span class="hud-tag">AI 60FPS</span>
+      </div>
+      <div class="hud-item hud-tc">
+        <span id="hud-timecode" class="hud-mono">00:00:00:00</span>
+      </div>
+      <div class="hud-item hud-tr">
+        <button id="skip-btn" class="trailer-skip" title="Bỏ qua trailer">✕ BỎ QUA</button>
+      </div>
+      <div class="hud-item hud-bl">
+        <span class="hud-mono">NGUYỄN TUẤN HƯNG // 6 KÊNH YOUTUBE AI &amp; TVC SHOWREEL</span>
+      </div>
+      <div class="hud-item hud-br">
+        <!-- Live Audio Equalizer Visualizer -->
+        <div class="hud-eq">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+      <div class="hud-crosshair"></div>
+    </div>
+
+    <div id="trailer-stage" class="trailer-stage"></div>
+    <div class="trailer-progress"><div id="trailer-bar"></div></div>
+  </div>
+
+  <!-- DYNAMIC SILVER CAT-EYE CANVASES -->
+  <canvas id="cat-eye-bg" class="cat-eye-bg"></canvas>
+  <canvas id="click-fx-canvas" class="click-fx-canvas"></canvas>
+
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo" href="#home">NGUYỄN TUẤN HƯNG<span>.</span></a>
+    <nav>
+      <a href="#channels">Kênh YouTube</a>
+      <a href="#tvc">TVC Biển Số</a>
+      <a href="#works">Video mẫu</a>
+      <a href="#skills">Kỹ năng &amp; Công cụ</a>
+      <a href="#contact">Liên hệ</a>
+      <!-- LUXURY DYNAMIC THEME SELECTOR -->
+      <div class="theme-selector-wrap">
+        <button id="theme-btn" class="nav-theme-btn" aria-haspopup="true" aria-expanded="false" title="Chọn giao diện động">
+          <span id="theme-icon">✨</span>
+          <span id="theme-label">Bạc Mắt Mèo</span>
+          <span class="theme-arrow">▾</span>
+        </button>
+        <div id="theme-dropdown" class="theme-dropdown">
+          <div class="theme-opt active" data-theme="silver">
+            <span class="theme-opt-icon">✨</span>
+            <div class="theme-opt-info">
+              <b>Trắng Bạc Mắt Mèo</b>
+              <small>Ánh kim & Vòng mắt mèo động</small>
+            </div>
+          </div>
+          <div class="theme-opt" data-theme="liquid">
+            <span class="theme-opt-icon">💧</span>
+            <div class="theme-opt-info">
+              <b>Apple Liquid Glass</b>
+              <small>Trong trẻo, tối giản chuẩn Apple</small>
+            </div>
+          </div>
+          <div class="theme-opt" data-theme="sakura">
+            <span class="theme-opt-icon">🌸</span>
+            <div class="theme-opt-info">
+              <b>Sakura Nhật Bản</b>
+              <small>Hoa anh đào rơi 3D & Phong cách Zen</small>
+            </div>
+          </div>
+          <div class="theme-opt" data-theme="dark">
+            <span class="theme-opt-icon">🎬</span>
+            <div class="theme-opt-info">
+              <b>Đêm Điện Ảnh</b>
+              <small>Cyberpunk neon & Kỹ xảo 4K</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button id="replay-btn" class="nav-trailer-btn">🎬 Xem Trailer</button>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section id="home" class="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1 class="reveal">Biến ý tưởng thành<br><em>video triệu view</em></h1>
+        <p class="sub reveal">Chuyên sản xuất TVC Biển Số Xe • Hệ thống 6 kênh hoạt hình AI (Sonic, Mario, PAW Patrol, Tom &amp; Jerry, Spider-Man, AI Cinematic) • TVC Quảng Cáo &amp; Kỹ xảo 100% AI.</p>
+        <div class="hero-actions reveal">
+          <a class="btn" href="#channels">
+            <span>Khám phá các kênh</span>
+            <span class="btn-arrow">↓</span>
+          </a>
+          <button id="hero-trailer-btn" class="btn alt">
+            <span class="btn-icon">▶</span>
+            <span>Xem Trailer giới thiệu</span>
+          </button>
+        </div>
+        <div class="stats reveal">
+          <div class="stat-card">
+            <div class="stat-number"><b data-n="50">0</b><span class="stat-unit">+</span></div>
+            <small class="stat-label">Dự án hoàn thành</small>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number"><b data-n="6">0</b><span class="stat-unit"> Kênh</span></div>
+            <small class="stat-label">Hệ thống YouTube AI</small>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number"><b data-n="1">0</b><span class="stat-unit">+ Năm</span></div>
+            <small class="stat-label">Kinh nghiệm thực chiến</small>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number"><b data-n="100">0</b><span class="stat-unit">%+</span></div>
+            <small class="stat-label">Độ kịch tính & Sáng tạo</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO FRAMELESS SHOWCASE (KHÔNG KHUNG - BUNG CHỈ SỐ KHI DI CHUỘT) -->
+      <div class="hero-visual reveal">
+        <div id="frameless-stage" class="frameless-stage">
+          <!-- Backlight Ambient Aura & Rings -->
+          <div class="frameless-halo"></div>
+          <div class="frameless-ring ring-inner"></div>
+          <div class="frameless-ring ring-outer"></div>
+
+          <!-- 4 Bursting Metric Badges (Bung từ đằng sau ra khi hover) -->
+          <div class="burst-chip chip-top-left" data-burst="tl">
+            <span class="burst-icon">⚡</span>
+            <div class="burst-info">
+              <b>6+ Kênh AI</b>
+              <small>Hàng triệu lượt xem</small>
+            </div>
+          </div>
+
+          <div class="burst-chip chip-top-right" data-burst="tr">
+            <span class="burst-icon">🎬</span>
+            <div class="burst-info">
+              <b>TVC &amp; 3D VFX</b>
+              <small>Chất lượng 4K UHD</small>
+            </div>
+          </div>
+
+          <div class="burst-chip chip-mid-left" data-burst="ml">
+            <span class="burst-icon">🏆</span>
+            <div class="burst-info">
+              <b>50+ Dự Án</b>
+              <small>Hoạt hình &amp; TVC xe</small>
+            </div>
+          </div>
+
+          <div class="burst-chip chip-mid-right" data-burst="mr">
+            <span class="burst-icon">🔥</span>
+            <div class="burst-info">
+              <b>100% Sáng Tạo</b>
+              <small>Kịch tính &amp; Điện ảnh</small>
+            </div>
+          </div>
+
+          <!-- Person Cutout Image (Foreground, NO FRAME, bottom torso smooth fade) -->
+          <div class="frameless-person-wrap" id="frameless-person">
+            <img src="assets/avatar_portrait.png" alt="Nguyễn Tuấn Hưng - Video Editor & AI Creator" class="frameless-person-img" id="frameless-img" loading="eager">
+          </div>
+
+          <!-- Floating Name Tag below person -->
+          <div class="frameless-name-card">
+            <div class="name-info">
+              <h3>Nguyễn Tuấn Hưng</h3>
+              <p>Video Editor &amp; AI Creator</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE CHANNELS SECTION -->
+  <section id="channels">
+    <div class="sec-head reveal">
+      <p class="sec-tag">HỆ THỐNG KÊNH</p>
+      <h2>Hệ Thống 6 Kênh YouTube Hoạt Hình &amp; Bóng Đá AI</h2>
+      <p class="sec-sub">Mạng lưới 6 kênh YouTube đang hoạt động với nội dung kịch bản, hình ảnh và kỹ xảo được tối ưu hóa bằng công cụ AI.</p>
+    </div>
+
+    <div class="channel-grid">
+      <!-- Ken Sonic -->
+      <a class="channel-card reveal" target="_blank" rel="noopener" href="https://www.youtube.com/@KenSonic6789/videos">
+        <div class="channel-thumb">
+          <img src="assets/channel_sonic.jpg" alt="Ken Sonic" loading="lazy">
+          <span class="badge blue">Sonic AI</span>
+        </div>
+        <div class="channel-info">
+          <h3>Ken Sonic</h3>
+          <p>Series đường đua tốc độ Sonic & Shadow, kỹ xảo điện ảnh và cốt truyện kỳ ảo.</p>
+          <div class="channel-foot">
+            <span class="btn-sm">Xem kênh YouTube ↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ken Mario -->
+      <a class="channel-card reveal" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCa7Ruwrg3L2iLaLvuoVh12Q">
+        <div class="channel-thumb">
+          <img src="assets/channel_mario.jpg" alt="Ken Mario" loading="lazy">
+          <span class="badge red">Mario AI</span>
+        </div>
+        <div class="channel-info">
+          <h3>Ken Mario</h3>
+          <p>Thế giới phiêu lưu của Mario x Bowser với đại chiến rồng lửa và đua ca-nô thần tốc.</p>
+          <div class="channel-foot">
+            <span class="btn-sm">Xem kênh YouTube ↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ken Football Racing -->
+      <a class="channel-card reveal" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCfyuFpKDdWyZ-2vKU6dZeGg">
+        <div class="channel-thumb">
+          <img src="assets/channel_football.jpg" alt="Ken Football Racing" loading="lazy">
+          <span class="badge green">Bóng Đá AI</span>
+        </div>
+        <div class="channel-info">
+          <h3>Ken Football Racing</h3>
+          <p>Đại chiến siêu sao Messi vs Ronaldo trên đường đua trực thăng, quái thú & đấu trường.</p>
+          <div class="channel-foot">
+            <span class="btn-sm">Xem kênh YouTube ↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Ken Spider -->
+      <a class="channel-card reveal" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCCEI9IJRFBriOfBMm73KMmA">
+        <div class="channel-thumb">
+          <img src="assets/channel_spider.jpg" alt="Ken Spider" loading="lazy">
+          <span class="badge purple">Spider AI</span>
+        </div>
+        <div class="channel-info">
+          <h3>Ken Spider</h3>
+          <p>Spider-Man x Venom so tài cùng các thần thú biến dị trong đấu trường hoành tráng.</p>
+          <div class="channel-foot">
+            <span class="btn-sm">Xem kênh YouTube ↗</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Tom & Jerry AI -->
+      <div class="channel-card reveal">
+        <div class="channel-thumb">
+          <img src="assets/channel_tomjerry.jpg" alt="Tom & Jerry AI Racing" loading="lazy">
+          <span class="badge amber">Hoạt hình AI</span>
+        </div>
+        <div class="channel-info">
+          <h3>Tom &amp; Jerry Racing</h3>
+          <p>Cuộc rượt đuổi nghẹt thở với ngựa cơ khí và ngựa thần có cánh qua sa mạc & bão tuyết.</p>
+          <div class="channel-foot">
+            <span class="btn-sm text-dim">Dự án AI tiêu biểu ★</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Cinematic Universe -->
+      <div class="channel-card reveal">
+        <div class="channel-thumb">
+          <img src="assets/channel_cinematic.jpg" alt="AI Cinematic Universe" loading="lazy">
+          <span class="badge purple">AI Cinematic 4K</span>
+        </div>
+        <div class="channel-info">
+          <h3>AI Cinematic Universe</h3>
+          <p>Vũ trụ kỹ xảo điện ảnh đỉnh cao, hiệu ứng bão lửa, ma thuật và đấu trường hoành tráng 100% bằng AI.</p>
+          <div class="channel-foot">
+            <span class="btn-sm text-dim">Dự án AI tiêu biểu ★</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TVC SECTION -->
+  <section id="tvc">
+    <div class="tvc-banner reveal">
+      <div class="tvc-text">
+        <p class="sec-tag">VIP LICENSE PLATES SHOWCASE</p>
+        <h2>Dự Án TVC Biển Số Xe Cao Cấp</h2>
+        <p>Sản xuất TVC định dạng dọc 9:16 chuẩn Reels &amp; TikTok cho showroom xe sang, định danh biển số VIP và kho số phong thủy độc bản. <em>(Mục TVC Quảng Cáo sản phẩm thương mại sẽ được cập nhật tiếp theo)</em>.</p>
+      </div>
+      <div class="tvc-cta">
+        <a class="btn" target="_blank" rel="noopener" href="https://drive.google.com/drive/folders/1I5QOeZLNJAmqHaIMgoutESE7_Tilzs_n?usp=drive_link">
+          📁 Mở thư mục Google Drive →
+        </a>
+      </div>
+    </div>
+
+    <!-- ARTISTIC 9:16 TVC SHOWCASE -->
+    <div class="sec-head reveal" style="margin-top: 48px; margin-bottom: 24px;">
+      <p class="sec-tag">TIKTOK &amp; REELS ADS</p>
+      <h2>Bộ Sưu Tập TVC Biển Số Xe</h2>
+      <p class="sec-sub">5 sản phẩm TVC định dạng dọc (9:16) sản xuất cho thương hiệu <em>Biển Số Đẹp Thái Nguyên</em> (Mr. Phạm Hồng Sơn) — Bấm vào để thưởng thức trọn vẹn.</p>
+    </div>
+
+    <div id="tvc-reels" class="tvc-reel-grid">
+      <!-- TVC 1: Showroom VIP -->
+      <div class="tvc-card reveal" data-video="assets/drive/tvc_9232.mp4" data-title="TVC Showroom Biển Số Đẹp Thái Nguyên" data-vertical="true">
+        <img loading="lazy" src="assets/drive/tvc_9232_thumb.jpg" alt="TVC Showroom Biển Số Đẹp Thái Nguyên">
+        <div class="tvc-card-top">
+          <span class="tvc-pill gold">★ Showroom VIP</span>
+          <span class="tvc-pill dark">01:13</span>
+        </div>
+        <div class="tvc-play-btn">▶</div>
+        <div class="tvc-card-body">
+          <small>Biển Số Đẹp Thái Nguyên • Mr. Phạm Hồng Sơn</small>
+          <h3>TVC Showroom Biển Số Đẹp</h3>
+          <p>Quảng bá showroom xe sang &amp; kho số VIP toàn quốc.</p>
+        </div>
+      </div>
+
+      <!-- TVC 2: Kho Số Phong Thủy -->
+      <div class="tvc-card reveal" data-video="assets/drive/tvc_fake1.mp4" data-title="TVC Đẹp Hơn Mỗi Hành Trình - Kho Số VIP" data-vertical="true">
+        <img loading="lazy" src="assets/drive/tvc_fake1_thumb.jpg" alt="TVC Đẹp Hơn Mỗi Hành Trình - Kho Số VIP">
+        <div class="tvc-card-top">
+          <span class="tvc-pill cyan">Kho Số Phong Thủy</span>
+          <span class="tvc-pill dark">01:11</span>
+        </div>
+        <div class="tvc-play-btn">▶</div>
+        <div class="tvc-card-body">
+          <small>Biển Số Đẹp Thái Nguyên</small>
+          <h3>TVC Đẹp Hơn Mỗi Hành Trình</h3>
+          <p>Trình diễn bảng số ngũ quý, tứ quý, sảnh tiến định danh xe sang.</p>
+        </div>
+      </div>
+
+      <!-- TVC 3: Biển VIP 198.99 -->
+      <div class="tvc-card reveal" data-video="assets/drive/tvc_0202.mp4" data-title="TVC Biển Số Đẹp 20B - 198.99 Nhất Cửu Phát" data-vertical="true">
+        <img loading="lazy" src="assets/drive/tvc_0202_thumb.jpg" alt="TVC Biển Số Đẹp 20B - 198.99 Nhất Cửu Phát">
+        <div class="tvc-card-top">
+          <span class="tvc-pill cyan">Biển Đẹp VIP</span>
+          <span class="tvc-pill dark">00:43</span>
+        </div>
+        <div class="tvc-play-btn">▶</div>
+        <div class="tvc-card-body">
+          <small>Biển Số Đẹp Thái Nguyên</small>
+          <h3>TVC Biển Đẹp 20B - 198.99</h3>
+          <p>Phong thủy thịnh vượng kết hợp kỹ xảo cận cảnh sắc nét.</p>
+        </div>
+      </div>
+
+      <!-- TVC 4: Lộc Phát 068.68 -->
+      <div class="tvc-card reveal" data-video="assets/drive/tvc_0922.mp4" data-title="TVC Biển Số Đẹp 20B - 068.68 Lộc Phát Đỉnh Cao" data-vertical="true">
+        <img loading="lazy" src="assets/drive/tvc_0922_thumb.jpg" alt="TVC Biển Số Đẹp 20B - 068.68 Lộc Phát Đỉnh Cao">
+        <div class="tvc-card-top">
+          <span class="tvc-pill cyan">Reels &amp; TikTok Ads</span>
+          <span class="tvc-pill dark">00:31</span>
+        </div>
+        <div class="tvc-play-btn">▶</div>
+        <div class="tvc-card-body">
+          <small>Biển Số Đẹp Thái Nguyên</small>
+          <h3>TVC Biển Đẹp 20B - 068.68</h3>
+          <p>TVC ngắn nhịp nhanh tối ưu chuyển đổi TikTok &amp; Reels Ads.</p>
+        </div>
+      </div>
+
+      <!-- TVC 5: Xe Sang & Biển Đẹp -->
+      <div class="tvc-card reveal" data-video="assets/drive/tvc_3.mp4" data-title="TVC Xe Sang Đi Kèm Biển Số Xứng Tầm" data-vertical="true">
+        <img loading="lazy" src="assets/drive/tvc_3_thumb.jpg" alt="TVC Xe Sang Đi Kèm Biển Số Xứng Tầm">
+        <div class="tvc-card-top">
+          <span class="tvc-pill cyan">Xe Sang &amp; Biển Số</span>
+          <span class="tvc-pill dark">00:35</span>
+        </div>
+        <div class="tvc-play-btn">▶</div>
+        <div class="tvc-card-body">
+          <small>Biển Số Đẹp Thái Nguyên</small>
+          <h3>TVC Xe Sang &amp; Biển Số</h3>
+          <p>Audi Sport đối thoại so sánh phong cách xe sang &amp; biển độc bản.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS SECTION -->
+  <section id="works">
+    <div class="sec-head reveal">
+      <p class="sec-tag">PORTFOLIO</p>
+      <h2>Video Tiêu Biểu</h2>
+      <p class="sec-sub">Lọc theo thể loại để xem nhanh sản phẩm.</p>
+    </div>
+    <div id="filters" class="filters reveal"></div>
+    <div id="grid" class="grid"></div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills">
+    <div class="sec-head reveal">
+      <p class="sec-tag">EXPERTISE</p>
+      <h2>Dịch Vụ &amp; Thế Mạnh</h2>
+    </div>
+    <div class="cards">
+      <!-- 01. ANIMATION & KỸ XẢO AI -->
+      <div class="card reveal" data-card="vfx">
+        <div class="card-header">
+          <div class="card-emblem-box emblem-vfx">
+            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="emblem-svg">
+              <defs>
+                <linearGradient id="vfxGradOuter" x1="0" y1="0" x2="72" y2="72">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="50%" stop-color="#818cf8"/>
+                  <stop offset="100%" stop-color="#c084fc"/>
+                </linearGradient>
+                <radialGradient id="vfxGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.45"/>
+                  <stop offset="65%" stop-color="#818cf8" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="bladeGrad" x1="16" y1="16" x2="56" y2="56">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                </linearGradient>
+              </defs>
+              <circle cx="36" cy="36" r="30" fill="url(#vfxGlow)"/>
+              <circle cx="36" cy="36" r="32" stroke="url(#vfxGradOuter)" stroke-width="1.6" stroke-dasharray="3 3" class="spin-slow"/>
+              <circle cx="36" cy="36" r="28" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+              <line x1="36" y1="4" x2="36" y2="8" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="36" y1="64" x2="36" y2="68" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="4" y1="36" x2="8" y2="36" stroke="#38bdf8" stroke-width="1.8"/>
+              <line x1="64" y1="36" x2="68" y2="36" stroke="#38bdf8" stroke-width="1.8"/>
+              <g class="spin-rev">
+                <path d="M36 14 L48 24 L42 36 L28 32 Z" fill="url(#bladeGrad)" stroke="#38bdf8" stroke-width="0.8" opacity="0.85"/>
+                <path d="M58 36 L48 48 L36 42 L40 28 Z" fill="url(#bladeGrad)" stroke="#818cf8" stroke-width="0.8" opacity="0.85"/>
+                <path d="M36 58 L24 48 L30 36 L44 40 Z" fill="url(#bladeGrad)" stroke="#c084fc" stroke-width="0.8" opacity="0.85"/>
+                <path d="M14 36 L24 24 L36 30 L32 44 Z" fill="url(#bladeGrad)" stroke="#38bdf8" stroke-width="0.8" opacity="0.85"/>
+              </g>
+              <circle cx="36" cy="36" r="9" fill="rgba(15, 23, 42, 0.9)" stroke="url(#vfxGradOuter)" stroke-width="1.5"/>
+              <path d="M38 27 L31 35 H36 L34 45 L41 37 H36 L38 27 Z" fill="#ffffff" filter="drop-shadow(0 0 6px #38bdf8)"/>
+              <line x1="18" y1="36" x2="54" y2="36" stroke="#38bdf8" stroke-width="0.8" stroke-dasharray="1 3" opacity="0.7"/>
+            </svg>
+          </div>
+          <span class="card-index-pill">01 / VFX &amp; 3D</span>
+        </div>
+        <h3>Animation &amp; Kỹ Xảo Điện Ảnh AI</h3>
+        <div class="card-caps">
+          <span class="card-cap">🎥 Camera 3D Tracking</span>
+          <span class="card-cap">💥 VFX Cháy Nổ &amp; Hạt</span>
+          <span class="card-cap">⚡ 60 FPS Mượt Mà</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-spec">4K UHD Master • 60 FPS</span>
+          <span class="card-footer-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- 02. TVC QUẢNG CÁO & SẢN PHẨM -->
+      <div class="card reveal" data-card="tvc">
+        <div class="card-header">
+          <div class="card-emblem-box emblem-tvc">
+            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="emblem-svg">
+              <defs>
+                <linearGradient id="tvcGradGold" x1="0" y1="0" x2="72" y2="72">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="50%" stop-color="#fbbf24"/>
+                  <stop offset="100%" stop-color="#d97706"/>
+                </linearGradient>
+                <radialGradient id="tvcGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.45"/>
+                  <stop offset="70%" stop-color="#d97706" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="slateGrad" x1="12" y1="12" x2="60" y2="60">
+                  <stop offset="0%" stop-color="#334155"/>
+                  <stop offset="100%" stop-color="#0f172a"/>
+                </linearGradient>
+              </defs>
+              <circle cx="36" cy="36" r="30" fill="url(#tvcGlow)"/>
+              <rect x="8" y="12" width="56" height="48" rx="8" fill="url(#slateGrad)" stroke="url(#tvcGradGold)" stroke-width="1.6"/>
+              <path d="M14 20 H18 V16" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M58 20 H54 V16" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M14 52 H18 V56" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M58 52 H54 V56" stroke="#fef08a" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 22 H60" stroke="url(#tvcGradGold)" stroke-width="1.4"/>
+              <line x1="20" y1="13" x2="26" y2="22" stroke="#fbbf24" stroke-width="1.5"/>
+              <line x1="32" y1="13" x2="38" y2="22" stroke="#fbbf24" stroke-width="1.5"/>
+              <line x1="44" y1="13" x2="50" y2="22" stroke="#fbbf24" stroke-width="1.5"/>
+              <circle cx="36" cy="39" r="14" stroke="url(#tvcGradGold)" stroke-width="1.4" stroke-dasharray="4 2" class="spin-slow"/>
+              <circle cx="36" cy="39" r="10" fill="rgba(251, 191, 36, 0.15)" stroke="#fef08a" stroke-width="1"/>
+              <polygon points="33,33 42,39 33,45" fill="#ffffff" filter="drop-shadow(0 0 6px #fbbf24)"/>
+              <circle cx="56" cy="27" r="2.5" fill="#ef4444" class="pulse-rec"/>
+              <circle cx="56" cy="27" r="4.5" stroke="#ef4444" stroke-width="0.8" opacity="0.6"/>
+            </svg>
+          </div>
+          <span class="card-index-pill">02 / TVC &amp; ADS</span>
+        </div>
+        <h3>TVC Quảng Cáo &amp; Sản Phẩm</h3>
+        <div class="card-caps">
+          <span class="card-cap">🎯 Hook 3s Giữ Chân</span>
+          <span class="card-cap">💎 Chuẩn Màu DCI-P3</span>
+          <span class="card-cap">📈 Tối Ưu Bán Hàng</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-spec">TVC • Shorts • TikTok Ads</span>
+          <span class="card-footer-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- 03. HOẠT HÌNH 100% AI -->
+      <div class="card reveal" data-card="story">
+        <div class="card-header">
+          <div class="card-emblem-box emblem-story">
+            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="emblem-svg">
+              <defs>
+                <linearGradient id="aiGradPink" x1="0" y1="0" x2="72" y2="72">
+                  <stop offset="0%" stop-color="#f472b6"/>
+                  <stop offset="50%" stop-color="#ec4899"/>
+                  <stop offset="100%" stop-color="#a855f7"/>
+                </linearGradient>
+                <radialGradient id="aiGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ec4899" stop-opacity="0.45"/>
+                  <stop offset="70%" stop-color="#a855f7" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <circle cx="36" cy="36" r="30" fill="url(#aiGlow)"/>
+              <ellipse cx="36" cy="36" rx="30" ry="12" stroke="url(#aiGradPink)" stroke-width="1.5" transform="rotate(-30 36 36)" class="spin-slow"/>
+              <ellipse cx="36" cy="36" rx="30" ry="12" stroke="url(#aiGradPink)" stroke-width="1.5" stroke-dasharray="4 3" transform="rotate(45 36 36)" class="spin-rev"/>
+              <circle cx="14" cy="24" r="2.5" fill="#f472b6" filter="drop-shadow(0 0 4px #f472b6)"/>
+              <circle cx="58" cy="48" r="2" fill="#ec4899" filter="drop-shadow(0 0 4px #ec4899)"/>
+              <circle cx="48" cy="18" r="2.2" fill="#ffffff" filter="drop-shadow(0 0 5px #ffffff)"/>
+              <polygon points="36,18 48,27 48,45 36,54 24,45 24,27" fill="rgba(30, 10, 30, 0.85)" stroke="url(#aiGradPink)" stroke-width="1.6"/>
+              <polygon points="36,24 44,30 44,42 36,48 28,42 28,30" fill="rgba(236, 72, 153, 0.25)" stroke="#ffffff" stroke-width="0.8"/>
+              <path d="M36 29 L38 34 L43 36 L38 38 L36 43 L34 38 L29 36 L34 34 Z" fill="#ffffff" filter="drop-shadow(0 0 8px #f472b6)"/>
+            </svg>
+          </div>
+          <span class="card-index-pill">03 / AI CINEMA</span>
+        </div>
+        <h3>Phim Hoạt Hình 100% AI</h3>
+        <div class="card-caps">
+          <span class="card-cap">👤 Giữ Nhất Quán Nhân Vật</span>
+          <span class="card-cap">🪐 Vũ Trụ Hoạt Hình AI</span>
+          <span class="card-cap">🔥 Kịch Bản Triệu View</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-spec">6 Kênh YouTube AI Tự Vận Hành</span>
+          <span class="card-footer-arrow">→</span>
+        </div>
+      </div>
+
+      <!-- 04. TVC BIỂN SỐ XE & KỸ XẢO CGI -->
+      <div class="card reveal" data-card="cgi">
+        <div class="card-header">
+          <div class="card-emblem-box emblem-cgi">
+            <svg viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" class="emblem-svg">
+              <defs>
+                <linearGradient id="cgiGradShield" x1="0" y1="0" x2="72" y2="72">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="40%" stop-color="#94a3b8"/>
+                  <stop offset="80%" stop-color="#38bdf8"/>
+                  <stop offset="100%" stop-color="#fbbf24"/>
+                </linearGradient>
+                <radialGradient id="cgiGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.35"/>
+                  <stop offset="60%" stop-color="#fbbf24" stop-opacity="0.15"/>
+                  <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="plateGrad" x1="16" y1="36" x2="56" y2="48">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="100%" stop-color="#b45309"/>
+                </linearGradient>
+              </defs>
+              <circle cx="36" cy="36" r="30" fill="url(#cgiGlow)"/>
+              <path d="M36 6 L58 14 C58 38 46 56 36 66 C26 56 14 38 14 14 Z" fill="rgba(15, 23, 42, 0.9)" stroke="url(#cgiGradShield)" stroke-width="1.8"/>
+              <path d="M36 12 L52 18 C52 38 42 52 36 60 C30 52 20 38 20 18 Z" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1"/>
+              <line x1="16" y1="26" x2="56" y2="26" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="6 3" opacity="0.8"/>
+              <line x1="22" y1="32" x2="50" y2="32" stroke="#ffffff" stroke-width="0.8" opacity="0.6"/>
+              <rect x="20" y="34" width="32" height="18" rx="3.5" fill="rgba(20, 20, 25, 0.95)" stroke="url(#plateGrad)" stroke-width="1.4"/>
+              <rect x="22" y="36" width="28" height="14" rx="2" stroke="rgba(254, 240, 138, 0.3)" stroke-width="0.6"/>
+              <path d="M36 38 L37.5 41 H40.5 L38 43 L39 46 L36 44 L33 46 L34 43 L31.5 41 H34.5 Z" fill="#fef08a" filter="drop-shadow(0 0 5px #fbbf24)"/>
+              <line x1="25" y1="47" x2="47" y2="47" stroke="#fef08a" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="27" cy="20" r="2" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)"/>
+              <circle cx="45" cy="20" r="2" fill="#38bdf8" filter="drop-shadow(0 0 6px #38bdf8)"/>
+            </svg>
+          </div>
+          <span class="card-index-pill">04 / LUXURY CGI</span>
+        </div>
+        <h3>TVC Biển Số Xe &amp; Kỹ Xảo CGI</h3>
+        <div class="card-caps">
+          <span class="card-cap">🚗 Ghép Biển Số VIP 3D</span>
+          <span class="card-cap">🏎️ Mô Hình Siêu Xe AI</span>
+          <span class="card-cap">✨ Ánh Sáng Phản Chiếu CGI</span>
+        </div>
+        <div class="card-footer">
+          <span class="card-footer-spec">Chuyên Biển Đấu Giá &amp; Xe Sang</span>
+          <span class="card-footer-arrow">→</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEDICATED SKILL & TOOLSET STACK -->
+    <div class="sec-head reveal" style="margin-top: 56px;">
+      <p class="sec-tag">TOOLSET &amp; MASTERY</p>
+      <h2>Bộ Công Cụ Thế Mạnh</h2>
+      <p class="sec-sub">Quy trình sản xuất video &amp; âm thanh AI khép kín với các công cụ hàng đầu hiện nay.</p>
+    </div>
+
+    <div class="tools-grid">
+      <!-- CapCut PC -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15)">
+            <img class="tool-logo" src="assets/logos/capcut.svg" alt="CapCut PC Logo">
+          </div>
+          <span class="tool-badge" style="background:#22d3ee22; color:#22d3ee">Dựng Phim Chính</span>
+        </div>
+        <h3>CapCut PC</h3>
+        <p>Hậu kỳ, cắt ghép nhịp nhanh, keyframe chuyển động, motion tracking, sound design &amp; xuất video 4K sắc nét.</p>
+      </div>
+
+      <!-- Kling AI -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(11, 242, 249, 0.08); border-color: rgba(11, 242, 249, 0.25)">
+            <img class="tool-logo" src="assets/logos/kling.svg" alt="Kling AI Logo">
+          </div>
+          <span class="tool-badge" style="background:#8b5cf622; color:#a78bfa">Video AI Hành Động</span>
+        </div>
+        <h3>Kling AI</h3>
+        <p>Tạo phân cảnh rượt đuổi siêu tốc, đại chiến nhân vật và giữ độ nhất quán khuôn mặt, trang phục nhân vật.</p>
+      </div>
+
+      <!-- Veo 3 -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(66, 133, 244, 0.1); border-color: rgba(66, 133, 244, 0.3)">
+            <img class="tool-logo" src="assets/logos/veo.svg" alt="Veo 3 Logo">
+          </div>
+          <span class="tool-badge" style="background:#3b82f622; color:#60a5fa">Cinematic Video</span>
+        </div>
+        <h3>Veo 3</h3>
+        <p>Góc máy điện ảnh đỉnh cao, hiệu ứng vật lý thực tế, ánh sáng và bối cảnh quy mô lớn chuẩn Hollywood.</p>
+      </div>
+
+      <!-- Muse -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.15)">
+            <img class="tool-logo" src="assets/logos/muse.svg" alt="Muse Logo">
+          </div>
+          <span class="tool-badge" style="background:#f43f5e22; color:#fb7185">Hình Ảnh &amp; Concept</span>
+        </div>
+        <h3>Muse</h3>
+        <p>Thiết kế tạo hình nhân vật hoạt hình, storyboard, phối cảnh siêu thực và biểu cảm sắc thái nhân vật.</p>
+      </div>
+
+      <!-- Vbee AI -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(30, 22, 78, 0.5); border-color: rgba(255, 214, 10, 0.3)">
+            <img class="tool-logo" src="assets/logos/vbee.svg" alt="Vbee AI Logo">
+          </div>
+          <span class="tool-badge" style="background:#10b98122; color:#34d399">Giọng Đọc AI</span>
+        </div>
+        <h3>Vbee AI</h3>
+        <p>Lồng tiếng thuyết minh tiếng Việt tự nhiên, đa ngữ điệu truyền cảm, tối ưu cho TVC và kịch bản hoạt hình.</p>
+      </div>
+
+      <!-- Suno -->
+      <div class="tool-card reveal">
+        <div class="tool-top">
+          <div class="tool-icon" style="background: rgba(255, 94, 58, 0.1); border-color: rgba(255, 94, 58, 0.3)">
+            <img class="tool-logo" src="assets/logos/suno.svg" alt="Suno Logo">
+          </div>
+          <span class="tool-badge" style="background:#f59e0b22; color:#fbbf24">Âm Nhạc AI</span>
+        </div>
+        <h3>Suno</h3>
+        <p>Sáng tác nhạc nền bản quyền 100%, từ nhạc giao hưởng hoành tráng đến nhạc kịch tính nghẹt thở theo từng phân cảnh.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact">
+    <div class="contact-box reveal">
+      <div class="contact-avatar-wrap">
+        <img src="assets/avatar_portrait.png" alt="Nguyễn Tuấn Hưng" class="contact-avatar" loading="lazy">
+      </div>
+      <p class="sec-tag">LIÊN HỆ</p>
+      <h2>Sẵn Sàng Hợp Tác Cùng Bạn</h2>
+      <p class="sub">Bạn có dự án TVC hay ý tưởng video hoạt hình AI cần triển khai? Hãy kết nối ngay hôm nay!</p>
+      <div class="links">
+        <a class="btn" href="mailto:nthung0004@gmail.com">✉ nthung0004@gmail.com</a>
+        <a class="btn alt" target="_blank" rel="noopener" href="https://zalo.me/0395051335">💬 Zalo: 0395.051.335</a>
+        <a class="btn alt" target="_blank" rel="noopener" href="https://www.facebook.com/share/1W2c1roFBe/?mibextid=wwXIfr">🌐 Facebook Cá Nhân ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 NGUYỄN TUẤN HƯNG • Video Editor &amp; AI Content Creator</p>
+  </footer>
+
+  <!-- VIDEO MODAL PLAYER -->
+  <div id="modal">
+    <div class="box">
+      <button id="close" aria-label="Đóng">✕</button>
+      <div id="player"></div>
+    </div>
+  </div>
+
+  <script src="projects.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
