@@ -1341,12 +1341,9 @@ class MultiThemeEngine {
     // 1. Apple Keynote Studio Spotlight (Center-top diffuse ambient glow)
     const maxDim = Math.max(this.w, this.h);
     const spot = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxDim * 0.55);
-    spot.addColorStop(0, 
-gba(255, 255, 255, ));
-    spot.addColorStop(0.35, 
-gba(255, 255, 255, ));
-    spot.addColorStop(0.7, 
-gba(255, 255, 255, 0.003));
+    spot.addColorStop(0, `rgba(255, 255, 255, ${0.08 * glowBoost})`);
+    spot.addColorStop(0.35, `rgba(255, 255, 255, ${0.03 * glowBoost})`);
+    spot.addColorStop(0.7, `rgba(255, 255, 255, ${0.003 * glowBoost})`);
     spot.addColorStop(1, 'transparent');
     ctx.fillStyle = spot;
     ctx.fillRect(0, 0, this.w, this.h);
@@ -1355,10 +1352,8 @@ gba(255, 255, 255, 0.003));
     const heroX = this.w * 0.68 + (this.mouseX - this.w / 2) * 0.02;
     const heroY = this.h * 0.42 + (this.mouseY - this.h / 2) * 0.02;
     const heroGlow = ctx.createRadialGradient(heroX, heroY, 0, heroX, heroY, 340);
-    heroGlow.addColorStop(0, 
-gba(255, 255, 255, ));
-    heroGlow.addColorStop(0.5, 
-gba(255, 255, 255, 0.008));
+    heroGlow.addColorStop(0, `rgba(255, 255, 255, ${0.06 * glowBoost})`);
+    heroGlow.addColorStop(0.5, `rgba(255, 255, 255, ${0.008 * glowBoost})`);
     heroGlow.addColorStop(1, 'transparent');
     ctx.fillStyle = heroGlow;
     ctx.beginPath();

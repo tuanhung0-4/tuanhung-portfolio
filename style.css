@@ -1195,57 +1195,174 @@ h1 em {
   max-width: 700px;
   margin-bottom: 28px;
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+  align-items: center;
+}
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 11px 24px;
-  border-radius: 40px;
-  background: linear-gradient(90deg, var(--p), var(--c));
+  justify-content: center;
+  gap: 10px;
+  padding: 13px 26px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--p), var(--c));
   color: #fff;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.92rem;
-  border: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.015em;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   cursor: pointer;
-  transition: all 0.25s;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 18px rgba(139, 92, 246, 0.35);
+  white-space: nowrap;
 }
 .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.45);
+  box-shadow: 0 8px 28px rgba(139, 92, 246, 0.55);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.btn .btn-arrow {
+  transition: transform 0.25s ease;
+  font-size: 1rem;
+}
+.btn:hover .btn-arrow {
+  transform: translateY(3px);
 }
 .btn.alt {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 .btn.alt:hover {
   border-color: var(--c);
-  background: rgba(34, 211, 238, 0.1);
-  box-shadow: none;
+  background: rgba(34, 211, 238, 0.12);
+  box-shadow: 0 6px 24px rgba(34, 211, 238, 0.25);
+  transform: translateY(-2px);
 }
+.btn.alt .btn-icon {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  transition: transform 0.25s ease;
+}
+.btn.alt:hover .btn-icon {
+  transform: scale(1.15);
+}
+
+/* STATS - LUXURY BENTO CARDS */
 .stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-top: 0;
+  border-top: none;
+}
+.stat-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 14px 10px;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+}
+.stat-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+.stat-number {
   display: flex;
-  gap: 36px;
-  flex-wrap: wrap;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+  align-items: baseline;
+  justify-content: center;
+  gap: 2px;
+  line-height: 1;
+  margin-bottom: 5px;
 }
-.stats b {
-  font-size: 1.8rem;
+.stat-number b {
+  font-size: clamp(1.8rem, 2.3vw, 2.4rem);
   font-weight: 800;
-  color: #fff;
-  background: linear-gradient(90deg, #fff, var(--c));
+  font-family: var(--font-heading);
+  background: linear-gradient(135deg, #ffffff 40%, var(--c, #22d3ee) 100%);
   -webkit-background-clip: text;
-  color: transparent;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
 }
-.stats div { font-size: 1.6rem; }
-.stats small {
+.stat-unit {
+  font-size: clamp(1.0rem, 1.25vw, 1.35rem);
+  font-weight: 700;
+  color: var(--c, #22d3ee);
+  opacity: 0.95;
+  margin-left: 2px;
+}
+.stat-label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 500;
   color: var(--t-dim);
-  margin-top: 2px;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* Theme variations for stat cards */
+body.silver-theme .stat-card, body.theme-silver .stat-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+}
+body.silver-theme .stat-number b, body.theme-silver .stat-number b {
+  background: linear-gradient(135deg, #ffffff 40%, #cbd5e1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.theme-liquid .stat-card, body.liquid-glass .stat-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+body.theme-liquid .stat-number b, body.liquid-glass .stat-number b {
+  background: linear-gradient(135deg, #f5f5f7 30%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.theme-sakura .stat-card, body.sakura-theme .stat-card {
+  background: rgba(244, 114, 182, 0.06);
+  border-color: rgba(244, 114, 182, 0.22);
+  box-shadow: 0 4px 20px rgba(225, 29, 72, 0.12);
+}
+body.theme-sakura .stat-number b, body.sakura-theme .stat-number b {
+  background: linear-gradient(135deg, #ffffff 30%, #f472b6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.theme-sakura .stat-unit, body.sakura-theme .stat-unit {
+  color: #f472b6;
 }
 
 /* CHANNELS GRID */
@@ -3197,23 +3314,91 @@ body.sakura-theme .contact-avatar, body.theme-sakura .contact-avatar {
 }
 
 /* ========================================================
+   GLOBAL MOBILE OVERFLOW GUARD & BOX SIZING
+   ======================================================== */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  box-sizing: border-box !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   RESPONSIVE HEADER & NAVIGATION
+   ======================================================== */
+@media (max-width: 900px) {
+  header {
+    padding: 10px 16px !important;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .logo {
+    font-size: 1.05rem !important;
+    letter-spacing: 0.01em !important;
+  }
+  nav {
+    gap: 8px !important;
+  }
+  nav > a {
+    display: none !important; /* Hide long menu links on tablet/mobile */
+  }
+  .nav-theme-btn {
+    padding: 6px 10px !important;
+    font-size: 0.74rem !important;
+    gap: 4px !important;
+  }
+  .nav-trailer-btn {
+    padding: 6px 11px !important;
+    font-size: 0.74rem !important;
+    gap: 4px !important;
+  }
+}
+
+/* ========================================================
    RESPONSIVE HERO SECTION (< 960px)
    ======================================================== */
 @media (max-width: 960px) {
   .hero {
-    padding-top: 100px;
-    padding-bottom: 30px;
+    padding-top: 85px !important;
+    padding-bottom: 30px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    min-height: auto !important;
   }
   .hero-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-    gap: 32px;
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    gap: 28px !important;
+    width: 100% !important;
   }
   .hero-content {
-    max-width: 100%;
+    max-width: 100% !important;
+    width: 100% !important;
   }
-  .hero-actions, .stats {
-    justify-content: center;
+  .hero-content h1 {
+    font-size: clamp(2.0rem, 6.8vw, 2.7rem) !important;
+    line-height: 1.18 !important;
+  }
+  .hero-content .sub {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+    margin: 0 auto 24px !important;
+    max-width: 580px !important;
+  }
+  .hero-actions {
+    justify-content: center !important;
+    margin-bottom: 24px !important;
+  }
+  .stats {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 10px !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
   }
   .hero-visual {
     order: -1;
@@ -3221,40 +3406,119 @@ body.sakura-theme .contact-avatar, body.theme-sakura .contact-avatar {
     padding: 0;
   }
   .frameless-stage {
-    max-width: 330px;
-    height: 440px;
+    max-width: 300px !important;
+    height: 400px !important;
   }
   .frameless-person-wrap {
-    width: 270px;
-    height: 380px;
+    width: 250px !important;
+    height: 350px !important;
   }
   .frameless-halo {
-    width: 260px;
-    height: 260px;
+    width: 260px !important;
+    height: 260px !important;
   }
   .frameless-ring.ring-inner {
-    width: 250px;
-    height: 250px;
+    width: 240px !important;
+    height: 240px !important;
   }
   .frameless-ring.ring-outer {
-    width: 320px;
-    height: 320px;
+    width: 300px !important;
+    height: 300px !important;
+  }
+  .frameless-stage .burst-chip {
+    transform: scale(0.88);
   }
   .frameless-stage:hover .chip-top-left,
   .frameless-stage.is-hovered .chip-top-left {
-    transform: translate(-65px, -50px) rotate(-6deg) scale(0.95);
+    transform: translate(-45px, -35px) scale(0.88) !important;
   }
   .frameless-stage:hover .chip-top-right,
   .frameless-stage.is-hovered .chip-top-right {
-    transform: translate(65px, -55px) rotate(6deg) scale(0.95);
+    transform: translate(45px, -40px) scale(0.88) !important;
   }
   .frameless-stage:hover .chip-mid-left,
   .frameless-stage.is-hovered .chip-mid-left {
-    transform: translate(-60px, 15px) rotate(-4deg) scale(0.95);
+    transform: translate(-40px, 15px) scale(0.88) !important;
   }
   .frameless-stage:hover .chip-mid-right,
   .frameless-stage.is-hovered .chip-mid-right {
-    transform: translate(60px, 20px) rotate(4deg) scale(0.95);
+    transform: translate(40px, 15px) scale(0.88) !important;
+  }
+}
+
+/* ========================================================
+   MOBILE PHONE OPTIMIZATIONS (< 640px)
+   ======================================================== */
+@media (max-width: 640px) {
+  section {
+    padding: 60px 16px 30px !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+  }
+  .hero {
+    padding-top: 75px !important;
+    padding-bottom: 20px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+  .hero-content h1 {
+    font-size: 2.1rem !important;
+  }
+  .hero-content .sub {
+    font-size: 0.86rem !important;
+    margin-bottom: 20px !important;
+  }
+  .hero-actions {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 10px !important;
+    margin-bottom: 22px !important;
+  }
+  .hero-actions .btn {
+    width: 100% !important;
+    padding: 13px 20px !important;
+    font-size: 0.92rem !important;
+    justify-content: center !important;
+  }
+  /* Stats 2x2 Clean Balanced Grid on Phone */
+  .stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .stat-card {
+    padding: 12px 8px !important;
+    border-radius: 14px !important;
+  }
+  .stat-number b {
+    font-size: 1.85rem !important;
+  }
+  .stat-unit {
+    font-size: 1.05rem !important;
+  }
+  .stat-label {
+    font-size: 0.74rem !important;
+  }
+  .frameless-stage {
+    max-width: 260px !important;
+    height: 350px !important;
+  }
+  .frameless-person-wrap {
+    width: 220px !important;
+    height: 310px !important;
+  }
+  .frameless-name-card {
+    padding: 6px 14px !important;
+  }
+  .frameless-name-card h3 {
+    font-size: 0.88rem !important;
+  }
+  .frameless-name-card p {
+    font-size: 0.72rem !important;
+  }
+  .frameless-stage .burst-chip {
+    display: none !important; /* Hide bursting chips on small screens to prevent any horizontal overflow */
   }
 }
 
